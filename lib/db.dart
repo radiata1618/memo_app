@@ -7,7 +7,7 @@ part 'db.g.dart';//generated when execute "flutter packages pub run build_runner
 
 class Answers extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get naiyo => text().withLength(min: 6, max: 32)();
+  TextColumn get naiyo => text().withLength(min: 0, max: 99)();
 }
 
 @UseMoor(tables: [Answers])//add Table name

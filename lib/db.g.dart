@@ -149,7 +149,7 @@ class $AnswersTable extends Answers with TableInfo<$AnswersTable, Answer> {
   GeneratedTextColumn get naiyo => _naiyo ??= _constructNaiyo();
   GeneratedTextColumn _constructNaiyo() {
     return GeneratedTextColumn('naiyo', $tableName, false,
-        minTextLength: 6, maxTextLength: 32);
+        minTextLength: 0, maxTextLength: 99);
   }
 
   @override

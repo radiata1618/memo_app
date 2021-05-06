@@ -38,34 +38,11 @@ class _NewListPagetate extends State<NewListPage> {
   TextEditingController priceController = TextEditingController();
   bool isloading = false;
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        TextField(
-          decoration: InputDecoration(hintText: 'Product Name'),
-          keyboardType: TextInputType.text,
-          controller: productNameController,
-        ),
-        TextField(
-          decoration: InputDecoration(hintText: 'Product Price'),
-          keyboardType: TextInputType.number,
-          controller: priceController,
-        ),
-        RaisedButton(
-          onPressed: () {
-            setState(() {
-              MyDatabase().insertanswer(Answer(
-                naiyo: priceController.text
-              ));
-
-              priceController.clear();
-              productNameController.clear();
-            });
-          },
-          color: Colors.green,
-          child: Text("Place Order"),
-        ),
         Container(
           height: 700,
           width: double.infinity,
@@ -96,9 +73,8 @@ class _NewListPagetate extends State<NewListPage> {
                         )),
                   );
                 },
-                itemCount: snapshot == null
-                    ? 0
-                    : snapshot.data.length,
+                itemCount: snapshot.data?.length ?? 0,//null対応済
+
               );
             },
           ),
