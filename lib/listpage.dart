@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'Dart:async';
+import 'showtext.dart';
 
 import 'db.dart';
 
@@ -56,21 +57,32 @@ class _NewListPagetate extends State<NewListPage> {
                   return Card(
                     color: Colors.orangeAccent,
                     child: ListTile(
-                        leading: CircleAvatar(
-                          child: Text('${index + 1}'),
-                          radius: 20,
+                      leading: CircleAvatar(
+                        child: Text('${index + 1}'),
+                        radius: 20,
+                      ),
+                      title: Text(snapshot.data[index].naiyo),
+                      subtitle: Text("Rs. ${snapshot.data[index].naiyo}"),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete_outline),
+                        onPressed: () {
+                          setState(() {
+                            MyDatabase().deleteanswer(snapshot.data[index]);
+                          });
+                        },
+                        color: Colors.red,
                         ),
-                        title: Text(snapshot.data[index].naiyo),
-                        subtitle: Text("Rs. ${snapshot.data[index].naiyo}"),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete_outline),
-                          onPressed: () {
-                            setState(() {
-                              MyDatabase().deleteanswer(snapshot.data[index]);
-                            });
-                          },
-                          color: Colors.red,
-                        )),
+                      onTap:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder:(context)=> ShowText(
+                                  filePath:'a',
+                                )
+                            )
+                        );
+                      }
+                    ),
                   );
                 },
                 itemCount: snapshot.data?.length ?? 0,//null対応済
