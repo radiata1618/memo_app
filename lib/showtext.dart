@@ -20,20 +20,25 @@ class ShowText extends StatefulWidget{
 
 
 class _ShowTextState extends State<ShowText>{
-  String _out = '';
+  //Future<String> _out = '';
+  String outputtext ='';
+  var _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context){
 
-    loadAsset().then((t) => {_out=t});
+    //loadAsset().then((t) => {_out=t});
+    //outputtext = loadAsset();
+    loadAsset();
+    print('text読み込み前'+this.outputtext);
 
-    print(_out);
+
 
     return Scaffold(
       appBar:AppBar(
         title:Text('問題'),
       ),
-      body:Center(child:Text(_out))
+      body:Center(child:Text("${outputtext}"))
     );
 
 
@@ -64,9 +69,15 @@ class _ShowTextState extends State<ShowText>{
   }
   */
 
-
-  Future<String> loadAsset() async {
+  void loadAsset() async {
     //UTF8
-    return rootBundle.loadString('assets/text/test4.txt');
+    String value=await rootBundle.loadString('assets/text/test4.txt');
+    if( value==this.outputtext){
+    }else {
+      setState(() { //再帰呼び出しになっている。
+        print('text読み込み処理' + this.outputtext);
+        this.outputtext = value;
+      });
+    }
   }
 }
